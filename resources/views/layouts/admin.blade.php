@@ -8,13 +8,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Site favicon -->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin/vendors/images/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/vendors/images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/vendors/images/favicon-16x16.png') }}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="https://www.cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+    {{-- <link rel="stylesheet" href="https://www.cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" /> --}}
 
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -31,9 +37,11 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('admin/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/styles/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
+
+
+
     {{-- ------------------------------------------------ --}}
     <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
     <link href="{{ asset('css/adduser.css') }}" rel="stylesheet">
@@ -41,6 +49,7 @@
     <link href="{{ asset('css/editprofile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/userdetails.css') }}" rel="stylesheet">
 
     {{-- this belows links is for chart --}}
 
@@ -75,17 +84,13 @@
             <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
         </div>
         <div class="header-right">
-            <div class="dropdown">
-                <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
-                    <i class="dw dw-notification"></i>
-                </a>
-            </div>
+
             <div class="dashboard-setting user-notification">
-                <div class="dropdown">
+                {{-- <div class="dropdown">
                     <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
                         <i class="dw dw-settings2"></i>
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="user-info-dropdown">
                 <div class="dropdown">
@@ -103,26 +108,21 @@
                             document.getElementById('logout-form').submit();">
                             <i class="dw dw-logout"></i>logout
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                            style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="github-link">
-                <a href="" target="_blank">
-                    <img src="{{ asset('admin/vendors/images/github.svg') }}" alt="">
-                </a>
-            </div>
+
         </div>
     </div>
 
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="">
-                <img src="{{ asset('admin/vendors/images/deskapp-logo.svg') }}" alt="" class="dark-logo">
-                <img src="{{ asset('admin/vendors/images/deskapp-logo-white.svg') }}" alt=""
+                <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="dark-logo">
+                <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt=""
                     class="light-logo">
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -143,8 +143,6 @@
                             <a href="#" class="dropdown-toggle">
                                 <span class="micon dw dw-name"></span><span class="mtext">Attendence</span>
                             </a>
-
-
                             <ul class="submenu">
                                 <li><a href="{{ route('attendance.create') }}">Check In | Check Out</a></li>
                                 <li><a href="#">Check out</a></li>
@@ -155,7 +153,7 @@
                     @endcan
 
                     <li class="dropdown">
-                        <a href="{{ route('users.index') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('calender') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-calendar-5">
                             </span><span class="mtext">Events</span>
                         </a>
@@ -219,11 +217,12 @@
 
 
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 
 
@@ -242,7 +241,11 @@
     <script src="{{ asset('admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('admin/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/scripts/dashboard.js') }}"></script>
+    <script src="{{ asset('js/userdetails.js') }}"></script>
+
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    {{-- <script src="{{ asset('admin/vendors/scripts/event.js') }}"></script> --}}
+
 
 
 
@@ -264,9 +267,120 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         $('#description').summernote({
             height: 100
+        });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(document).ready(function() {
+                var calendar = $('#calendar').fullCalendar({
+                    editable: true,
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    events: '/full-calender',
+                    selectable: true,
+                    selectHelper: true,
+                    select: function(start, end, allDay) {
+                        var title = prompt('Event Title:');
+
+                        if (title) {
+                            var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
+
+                            var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+
+                            $.ajax({
+                                url: "/full-calender/action",
+                                type: "POST",
+                                data: {
+                                    title: title,
+                                    start: start,
+                                    end: end,
+                                    type: 'add'
+                                },
+                                success: function(data) {
+                                    calendar.fullCalendar('refetchEvents');
+                                    alert("Event Created Successfully");
+                                }
+                            })
+                        }
+                    },
+                    editable: true,
+                    eventResize: function(event, delta) {
+                        var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                        var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                        var title = event.title;
+                        var id = event.id;
+                        $.ajax({
+                            url: "/full-calender/action",
+                            type: "POST",
+                            data: {
+                                title: title,
+                                start: start,
+                                end: end,
+                                id: id,
+                                type: 'update'
+                            },
+                            success: function(response) {
+                                calendar.fullCalendar('refetchEvents');
+                                alert("Event Updated Successfully");
+                            }
+                        })
+                    },
+                    eventDrop: function(event, delta) {
+                        var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                        var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                        var title = event.title;
+                        var id = event.id;
+                        $.ajax({
+                            url: "/full-calender/action",
+                            type: "POST",
+                            data: {
+                                title: title,
+                                start: start,
+                                end: end,
+                                id: id,
+                                type: 'update'
+                            },
+                            success: function(response) {
+                                calendar.fullCalendar('refetchEvents');
+                                alert("Event Updated Successfully");
+                            }
+                        })
+                    },
+
+                    eventClick: function(event) {
+                        if (confirm("Are you sure you want to remove it?")) {
+                            var id = event.id;
+                            $.ajax({
+                                url: "/full-calender/action",
+                                type: "POST",
+                                data: {
+                                    id: id,
+                                    type: "delete"
+                                },
+                                success: function(response) {
+                                    calendar.fullCalendar('refetchEvents');
+                                    alert("Event Deleted Successfully");
+                                }
+                            })
+                        }
+                    }
+                });
+
+            });
         });
     </script>
 

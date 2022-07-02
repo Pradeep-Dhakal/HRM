@@ -51,6 +51,8 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                     <a class="dropdown-item" href="{{ route('users.show', $user->id) }}"><i
                                                             class="dw dw-eye"></i> View</a>
+                                                    <a class="dropdown-item" href="{{ route('userinfo.create', $user->id) }}"><i
+                                                            class="dw dw-add"></i> User Info</a>
                                                     @can('user-edit')
                                                         <a class="dropdown-item" href="{{ route('users.edit', $user->id) }}"><i
                                                                 class="dw dw-edit2"></i> Edit</a>

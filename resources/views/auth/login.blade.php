@@ -6,9 +6,9 @@
     <title>Admin Login</title>
 
     <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('admin/vendors/images/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('admin/vendors/images/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/vendors/images/favicon-16x16.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('admin/vendors/images/hr-logos_white.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('admin/vendors/images/hr-logos_white.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/vendors/images/hr-logos_white.png')}}">
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,12 +35,12 @@
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="brand-logo">
             <a href="">
-                <img src="{{asset('admin/vendors/images/deskapp-logo.svg')}}" alt="">
+                <img src="{{asset('admin/vendors/images/hr-logos_black.png')}}" alt="">
             </a>
         </div>
         <div class="login-menu">
             <ul>
-                <li><a href="">Admin Login</a></li>
+                <li><a href="">Login Panel</a></li>
             </ul>
         </div>
     </div>
@@ -49,12 +49,12 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 col-lg-7">
-                <img src="{{asset('admin/vendors/images/login-page-img.png')}}" alt="">
+                <img src="{{asset('admin/vendors/images/hr-logos_black.png')}}" alt="">
             </div>
             <div class="col-md-6 col-lg-5">
                 <div class="login-box bg-white box-shadow border-radius-10">
                     <div class="login-title">
-                        <h2 class="text-center text-primary">Admin Login</h2>
+                        <h2 class="text-center text-primary">Login Panel</h2>
                     </div>
                     <form action="{{ route('login') }}" method="post">
                         @csrf

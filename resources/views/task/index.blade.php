@@ -24,18 +24,32 @@
                         <td>{!! $tdata->description !!}</td>
                         <td>{{ $tdata->status }}</td>
                         {{-- <td>{{$tdata->status}}</td> --}}
-                        <td>
-                            <a href="{{ route('task.show', $tdata->id) }}"><i style="font-size: 30px;"
-                                    class="fa-solid fa-eye m-2 pt-3"></i></a>
 
-                            {{-- <a href="{{route('task.destroy',$tdata->id)}}"><i style="font-size: 30px;" class="fa fa-trash m-2 "></i></a> --}}
-                            {!! Form::open(['method' => 'DELETE', 'url' => route('task.destroy', $tdata->id), 'style' => 'display:inline']) !!}
+                            <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                        href="#" role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                        <a class="dropdown-item" href="{{ route('task.show', $tdata->id) }}"><i
+                                                class="dw dw-eye"></i> View</a>
 
-                            {!! Form::button('<i style="font-size: 30px;" class="fa fa-trash m-2 "></i>', ['type' => 'submit', 'class' => 'btn btn-defult', 'title' => 'Delete Post', 'onclick' => 'return confirm("Confirm delete?")']) !!}
+                                            <a class="dropdown-item" href="{{ route('task.edit', $tdata->id) }}"><i
+                                                    class="dw dw-edit2"></i> Edit</a>
 
-                            {!! Form::close() !!}
 
-                        </td>
+                                            {{ Form::open(['url' => route('task.destroy', $tdata->id), 'onsubmit' => "return confirm('Are you sure you want to delete this?')", 'class' => 'form pull-left']) }}
+                                            @method('delete')
+                                            <button class="dropdown-item"><i class="dw dw-delete-3"></i>
+                                                Delete</button>
+                                            {{ Form::close() }}
+
+                                    </div>
+                                </div>
+                            </td>
+
+
                     </tr>
                 @empty
                     <tr>

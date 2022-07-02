@@ -65,14 +65,14 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Assigne Date</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control taskdate" type="date" name="assigned_date"
+                            <input class="form-control" class="taskdate" type="date" name="assigned_date"
                                 placeholder="Enter task assigned data" value="{{ $user->assigned_date }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Due Date</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control taskdate" type="date"  name="due_date" placeholder="Enter task due data"
+                            <input class="form-control" class="taskdate" type="date"  name="due_date" placeholder="Enter task due data"
                                 value="{{ $user->due_date }}" required>
                         </div>
                     </div>

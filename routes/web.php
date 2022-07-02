@@ -13,6 +13,9 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FullCalenderController;
+use App\Http\Controllers\UserDetailsController;
+
 /*
 
 /*
@@ -38,6 +41,7 @@ Route::get('task/downloaded/{id}',[TaskController::class,'downloaded'])->name('d
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
+    Route::resource('userinfo', UserDetailsController ::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('attendance', AttendanceController::class);
@@ -46,5 +50,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('payroll', PayrollController::class);
     Route::resource('profile', ProfileController::class);
     Route::resource('task', TaskController::class);
+
+
+    Route::get('full-calender', [FullCalenderController::class, 'index'])->name('calender');
+    Route::post('full-calender/action', [FullCalenderController::class, 'action']);
 
 });
