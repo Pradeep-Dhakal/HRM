@@ -143,7 +143,7 @@
     #progressbar li {
         list-style-type: none;
         font-size: 15px;
-        width: 10%;
+        width: 16%;
         float: left;
         position: relative;
         font-weight: 400
@@ -159,14 +159,23 @@
         content: "\f007"
     }
 
-    #progressbar #payment:before {
+    #progressbar #address:before {
         font-family: FontAwesome;
-        content: "\f030"
+        content: "\f3c5"
+    }
+    #progressbar #skill:before {
+        font-family: FontAwesome;
+        content: "\f0f0"
     }
 
     #progressbar #education:before {
         font-family: FontAwesome;
         content: "\f19d"
+    }
+
+    #progressbar #salary:before {
+        font-family: FontAwesome;
+        content: "\f156"
     }
 
     #progressbar #confirm:before {

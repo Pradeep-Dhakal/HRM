@@ -14,7 +14,7 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FullCalenderController;
-use App\Http\Controllers\UserDetailsController;
+use App\Http\Controllers\UserInfoController;
 
 /*
 
@@ -37,11 +37,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/taskReminder', [App\Http\Controllers\HomeController::class, 'taskReminder'])->name('taskReminder');
 
-Route::get('task/downloaded/{id}',[TaskController::class,'downloaded'])->name('downloaded');
+Route::get('task/downloaded/{id}', [TaskController::class, 'downloaded'])->name('downloaded');
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
-    Route::resource('userinfo', UserDetailsController ::class);
+    Route::get('userinfo/{id}', [UserInfoController::class, 'create'])->name('create');
+    Route::post('userinfo/{id}', [UserInfoController::class, 'store'])->name('store');
+
+
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('attendance', AttendanceController::class);
@@ -54,5 +57,4 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('full-calender', [FullCalenderController::class, 'index'])->name('calender');
     Route::post('full-calender/action', [FullCalenderController::class, 'action']);
-
 });

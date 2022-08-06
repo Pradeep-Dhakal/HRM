@@ -65,5 +65,8 @@ class User extends Authenticatable
         # code...
         return $this->belongsToMany(Task::class);
     }
+    public function personalinfo(){
+        return $this->hasOne(Personalinfo::class);
+    }
 
 }

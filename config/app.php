@@ -217,6 +217,10 @@ return [
         // 'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
+
+
+
 
     ])->toArray(),
 

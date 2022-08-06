@@ -120,7 +120,7 @@
 
     <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="">
+            <a href="/">
                 <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="dark-logo">
                 <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt=""
                     class="light-logo">
@@ -242,6 +242,7 @@
     <script src="{{ asset('admin/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/scripts/dashboard.js') }}"></script>
     <script src="{{ asset('js/userdetails.js') }}"></script>
+    <script src="{{ asset('admin/vendors/scripts/newrowadd.js') }}"></script>
 
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     {{-- <script src="{{ asset('admin/vendors/scripts/event.js') }}"></script> --}}
