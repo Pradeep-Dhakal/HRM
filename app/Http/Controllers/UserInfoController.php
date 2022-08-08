@@ -119,4 +119,21 @@ class UserInfoController extends Controller
         $salary->save();
         return redirect()->back();
     }
+
+    public function update(Request $request, $id)
+    {
+        $personal=Personalinfo::find($id);
+        dd($personal);
+        $personal->user_id = $id;
+        $personal->full_name = $request->fname . '' . $request->lname;
+        $personal->persoanal_email = $request->email;
+        $personal->date_of_birth = $request->dob;
+        $personal->gender = $request->gender;
+        $personal->blood_group = $request->bloodgroup;
+        $personal->contact_no = $request->phone;
+        $personal->citizenship_no = $request->citizen_no;
+        $personal->NID_card_no = $request->nid;
+        // $personal->image = $imgname;
+        $personal->save();
+    }
 }

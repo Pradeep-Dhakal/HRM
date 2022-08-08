@@ -9,11 +9,9 @@
             @endif
             <div class="card">
                 <div class="card-header">Roles
-                    @can('role-create')
                         <span class="float-right">
                             <a class="btn btn-primary" href="{{ route('roles.create') }}">New Role</a>
                         </span>
-                    @endcan
                 </div>
                 <div class="card-body">
 
@@ -43,17 +41,14 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                     <a class="dropdown-item" href="{{ route('roles.show', $role->id) }}"><i
                                                             class="dw dw-eye"></i> View</a>
-                                                            @can('role-edit')
                                                         <a class="dropdown-item" href="{{ route('roles.edit', $role->id) }}"><i
                                                                 class="dw dw-edit2"></i> Edit</a>
-                                                    @endcan
-                                                    @can('role-delete')
+
                                                         {{ Form::open(['url' => route('roles.destroy', $role->id), 'onsubmit' => "return confirm('Are you sure you want to delete this?')", 'class' => 'form pull-left']) }}
                                                         @method('delete')
                                                         <button class="dropdown-item"><i class="dw dw-delete-3"></i>
                                                             Delete</button>
                                                         {{ Form::close() }}
-                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

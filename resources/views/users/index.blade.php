@@ -53,17 +53,13 @@
                                                             class="dw dw-eye"></i> View</a>
                                                     <a class="dropdown-item" href="{{ route('create', $user->id) }}"><i
                                                             class="dw dw-add"></i> User Info</a>
-                                                    @can('user-edit')
                                                         <a class="dropdown-item" href="{{ route('users.edit', $user->id) }}"><i
                                                                 class="dw dw-edit2"></i> Edit</a>
-                                                    @endcan
-                                                    @can('user-delete')
                                                         {{ Form::open(['url' => route('users.destroy', $user->id), 'onsubmit' => "return confirm('Are you sure you want to delete this?')", 'class' => 'form pull-left']) }}
                                                         @method('delete')
                                                         <button class="dropdown-item"><i class="dw dw-delete-3"></i>
                                                             Delete</button>
                                                         {{ Form::close() }}
-                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

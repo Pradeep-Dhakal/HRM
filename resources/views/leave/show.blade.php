@@ -40,18 +40,25 @@
                             {!! $details->message !!}
                             ********
                         </div>
+
                         <div class="lead">
                             <strong>Status</strong>
+                            @role('admin')
                             <select name="status" id="user">
                                 <option value="{{ $details->status }}">{{ $details->status }}</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Reject</option>
                                 <option value="Pending">Pending</option>
                             </select>
+                            @else
+                            {{ $details->status }}
+                            @endrole
                         </div>
+                        @role('admin')
                         <div class="lead">
                             <button type="submit" class="btn btn-primary" class="text-right">Save</button>
                         </div>
+                        @endrole
                     </form>
                 </div>
             </div>

@@ -14,6 +14,8 @@ class FeedController extends Controller
 
     {
         $this->post=$post;
+        $this->middleware('permission:Newsfeed Module', ['only' => ['index','store','create','show','edit','destroy','update']]);
+
 
     }
     /**

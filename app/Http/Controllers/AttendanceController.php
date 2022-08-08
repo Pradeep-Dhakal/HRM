@@ -16,10 +16,10 @@ class AttendanceController extends Controller
      */
     function __construct(Attendance $attendance)
     {
-        $this->middleware('permission:Attendance-record|Attendance-create|Attendance-edit|Attendance-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:Attendance-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Attendance-edit|Attendance-record', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Attendance-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:Attendance Module', ['only' => ['index','store','create','edit','destroy','update','show']]);
+        // $this->middleware('permission:Attendance-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:Attendance-edit|Attendance-record', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:Attendance-delete', ['only' => ['destroy']]);
 
         $this->attendance  = $attendance;
     }

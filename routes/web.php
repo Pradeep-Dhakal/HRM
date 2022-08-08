@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::get('userinfo/{id}', [UserInfoController::class, 'create'])->name('create');
     Route::post('userinfo/{id}', [UserInfoController::class, 'store'])->name('store');
+    Route::post('userinfo/{id}', [UserInfoController::class, 'update'])->name('update');
 
 
     Route::resource('roles', RoleController::class);

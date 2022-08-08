@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
 {
+    public function __construct()
+
+    {
+
+        $this->middleware('permission:Task Module', ['only' => ['index','store','create','edit','destroy','update','downloaded','show']]);
+
+
+    }
     /**
      * Display a listing of the resource.
      *

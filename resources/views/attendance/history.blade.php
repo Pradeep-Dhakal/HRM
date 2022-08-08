@@ -52,23 +52,25 @@
                 @endif
             </tbody>
         </table>
-    @endrole
-
-    @role('Employee')
+    @else
         <div class="text-center ">
             <h2>
                 Your Attendace History
             </h2>
             <?php
-            $tday = '{{Carbon::today()}}';
-            $newd = DB::table('attendances')->select('*')->where('user_id', auth()->User()->id)->first();
+            $tday = Carbon\Carbon::today();
+            // dd($tday);
+            $newd = DB::select('select * from attendances where user_id = ' . auth()->user()->id);
+            dd($newd);
             ?>
-                @if ($newd->Date == $tday)
+            @isset($newd)
+                @if ($newd->date == $tday)
                 @else
                     <a href="{{ route('attendance.create') }}">
                         <button class="btn btn-primary">Create New Attendance</button>
                     </a>
                 @endif
+            @endisset
 
 
             <table class="table table-hover table-dark">
@@ -88,7 +90,7 @@
             $newdata1 = DB::table('attendances')->get('*')->where('user_id', auth()->User()->id);
             // return $this->with('users')->get('*')->where('user_id', auth()->User()->id);
 
-        @endphp --}}
+            @endphp --}}
                     @if (isset($data1))
                         @foreach ($data1 as $key => $dat1)
                             <tr>
@@ -115,5 +117,10 @@
                     @endif
                 </tbody>
             </table>
-        @endrole
-    @endsection
+        </div>
+    @endrole
+
+
+
+
+@endsection

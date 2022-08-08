@@ -15,27 +15,16 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'permission-list',
-            'permission-create',
-            'permission-edit',
-            'permission-delete',
+
 
             // aba kk permission chainxa sab yha dynamically lekhna parxa
-            'view-event',
-            'view-service',
-            'view-contact',
-            'Roles & permission',
-            'Attendance-record',
-'            Attendance-create
-'
+            'Newsfeed Module',
+            'Attendance Module',
+            'User Module',
+            'Roles & permission module',
+            'Leave Module',
+            'Task Module'
+
         ];
 
         foreach ($data as $permission) {

@@ -22,7 +22,7 @@ class Leave extends Model
     public function getone()
     {
         # code...
-        return $this->with('users')->get('*')->where('user_id', auth()->User()->id);
+        return $this->with('leaves')->select('*')->where('user_id', auth()->User()->id);
     }
 
 

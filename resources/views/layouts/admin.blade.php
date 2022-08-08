@@ -13,10 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/vendors/images/hr-logos_white.png') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -122,8 +120,7 @@
         <div class="brand-logo">
             <a href="/">
                 <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="dark-logo">
-                <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt=""
-                    class="light-logo">
+                <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="light-logo">
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
@@ -132,13 +129,15 @@
         <div class="menu-block customscroll">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
+                    @can('Newsfeed Module')
                     <li class="dropdown">
                         <a href="{{ route('Feed.index') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-house-1">
                             </span><span class="mtext">News Feed</span>
                         </a>
                     </li>
-                    @can('Attendance-record')
+                    @endcan
+                    @can('Attendance Module')
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle">
                                 <span class="micon dw dw-name"></span><span class="mtext">Attendence</span>
@@ -158,15 +157,16 @@
                             </span><span class="mtext">Events</span>
                         </a>
                     </li>
+                    @can('User Module')
+                        <li class="dropdown">
+                            <a href="{{ route('users.index') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon dw dw-user">
+                                </span><span class="mtext">Users</span>
+                            </a>
+                        </li>
+                    @endcan
 
-                    <li class="dropdown">
-                        <a href="{{ route('users.index') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-user">
-                            </span><span class="mtext">Users</span>
-                        </a>
-                    </li>
-
-                    @can('Roles & permission')
+                    @can('Roles & permission module')
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon dw dw-user"></span><span class="mtext">Roles And
@@ -181,19 +181,19 @@
                         </li>
                     @endcan
                     {{-- ======================================== --}}
+                    @can('Leave Module')
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon dw dw-house"></span><span class="mtext">Leave</span>
+                            </a>
+                            <ul class="submenu">
 
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-house"></span><span class="mtext">Leave</span>
-                        </a>
-                        <ul class="submenu">
+                                <li><a href="{{ route('leave.create') }}">Leave Request</a></li>
+                                <li><a href="{{ route('leave.index') }}">History & Status</a></li>
 
-                            <li><a href="{{ route('leave.create') }}">Leave Request</a></li>
-                            <li><a href="{{ route('leave.index') }}">History & Status</a></li>
-
-                        </ul>
-                    </li>
-
+                            </ul>
+                        </li>
+                    @endcan
                     <li class="dropdown">
                         <a href="{{ route('task.index') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-slideshow"></span>

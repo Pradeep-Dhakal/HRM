@@ -15,6 +15,12 @@ class LeaveController extends Controller
 
     {
         $this->leave = $leave;
+
+             $this->middleware('permission:Leave Module', ['only' => ['index','store','create','edit','destroy','show']]);
+            //  $this->middleware('permission:user-create', ['only' => ['create','store']]);
+            //  $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+            //  $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+
     }
     /**
      * Display a listing of the resource.
@@ -26,9 +32,10 @@ class LeaveController extends Controller
         //
         $data = $this->leave->getall();
         $data1 = $this->leave->getone();
+        // dd($data1);
 
 
-        return view('leave.index', compact('data', 'data1'));
+        return view('leave.index', compact('data'));
     }
 
     /**
