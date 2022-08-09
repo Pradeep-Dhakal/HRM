@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
+// use Google\Service\Transcoder\Input;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -13,7 +17,9 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        return view('payroll.index');
+        $users=User::all();
+        $filterusers=User::where('id',Request()->get('User_id'))->first();
+        return view('payroll.index', compact('users','filterusers'));
     }
 
     /**
@@ -43,7 +49,7 @@ class PayrollController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $r)
     {
         //
     }
