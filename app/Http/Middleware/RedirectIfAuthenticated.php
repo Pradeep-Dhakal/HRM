@@ -4,8 +4,14 @@ namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\LoginNotification;
+
 
 class RedirectIfAuthenticated
 {
@@ -26,6 +32,21 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
         }
+
+        $useremal=$request->email;
+        $userId=User::where('email',$useremal)->get();
+
+        // dd($userId);
+        $user=User::find($useremal);
+        $logindetect = [
+            'greeting' => 'new Login Detected',
+            'body' => $request->ip(),
+
+            'thanks' => 'Thanks from PHR Auth System',
+            'actionText' => 'View task',
+            'actionURL' => url('http://127.0.0.1:8000/login'),
+        ];
+        Notification::send($userId, new LoginNotification($logindetect));
 
         return $next($request);
     }
