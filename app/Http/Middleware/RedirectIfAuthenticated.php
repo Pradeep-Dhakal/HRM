@@ -32,6 +32,7 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
         }
+/*
 
         $useremal=$request->email;
         $userId=User::where('email',$useremal)->get();
@@ -48,6 +49,7 @@ class RedirectIfAuthenticated
         ];
         Notification::send($userId, new LoginNotification($logindetect));
 
+*/
         return $next($request);
     }
 }

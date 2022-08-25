@@ -30,11 +30,11 @@
                                 <td>
                                     <a class="btn btn-success" href="{{ route('permissions.show',$permission->id) }}">Show</a>
                                         <a class="btn btn-primary" href="{{ route('permissions.edit',$permission->id) }}">Edit</a>
-                                    @endcan
+
                                         {!! Form::open(['method' => 'DELETE','route' => ['permissions.destroy', $permission->id],'style'=>'display:inline']) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}
-                                    @endcan
+
                                 </td>
                             </tr>
                         @endforeach

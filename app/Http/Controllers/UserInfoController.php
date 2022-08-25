@@ -9,6 +9,7 @@ use App\Models\Salary;
 use App\Models\Skill;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -23,9 +24,6 @@ class UserInfoController extends Controller
         // dd($request->all());
         //  this area contents the code for personal info
 
-
-
-
         $personal = new Personalinfo();
 
         if ($request->file('image')) {
@@ -37,7 +35,7 @@ class UserInfoController extends Controller
         }
 
         $personal->user_id = $id;
-        $personal->full_name = $request->fname . '' . $request->lname;
+        $personal->full_name = $request->fname . '&nsbp' . $request->lname;
         $personal->persoanal_email = $request->email;
         $personal->date_of_birth = $request->dob;
         $personal->gender = $request->gender;
@@ -123,17 +121,38 @@ class UserInfoController extends Controller
     public function update(Request $request, $id)
     {
         $personal=Personalinfo::find($id);
-        dd($personal);
-        $personal->user_id = $id;
-        $personal->full_name = $request->fname . '' . $request->lname;
-        $personal->persoanal_email = $request->email;
-        $personal->date_of_birth = $request->dob;
+        // dd($personal);
+        $personal->User_id = $id;
+        $personal->full_name = $request->full_name;
+        $personal->persoanal_email = $request->persoanal_email;
+        $personal->date_of_birth = $request->date_of_birth;
         $personal->gender = $request->gender;
-        $personal->blood_group = $request->bloodgroup;
-        $personal->contact_no = $request->phone;
-        $personal->citizenship_no = $request->citizen_no;
-        $personal->NID_card_no = $request->nid;
+        $personal->blood_group = $request->blood_group;
+        $personal->contact_no = $request->contact_no;
+        $personal->citizenship_no = $request->citizenship_no;
+        $personal->NID_card_no = $request->NID_card_no;
+
+        if($request->hasFile('image')) {
+            File::delete('uploads/profilepicture/'.$personal->image);
+            $image             = $request->file('image');
+            $ImageUpload        = Image::make($image)->resize(1000, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $name               = time().'.' . $image->getClientOriginalExtension();
+            $destinationPath    = public_path('uploads/profilepicture/');
+            $ImageUpload->save($destinationPath.$name);
+        }else{
+            $name = $personal->image;
+        }
+        $personal->image=$name;
         // $personal->image = $imgname;
         $personal->save();
+
+        $status = $personal->save();
+        if ($status) {
+            return redirect()->back()->with('success', 'Your Profile Details has been updated succefully!!!!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to Updating Profile Details at this moment!!!!');
+        }
     }
 }

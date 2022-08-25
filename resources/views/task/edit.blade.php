@@ -29,7 +29,7 @@
                 <form action="{{ route('task.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Select user</label>
                         <div class="col-sm-12 col-md-10" class="m-4 p-4px">
                             <select name="User_id" id="user">
@@ -38,10 +38,10 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">User</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Assigned By</label>
                         <div class="col-sm-12 col-md-10">
                             <input class="form-control" type="text" name="task_name" placeholder="Enter task name"
                                 value="{{ $user->users->name }}" required>

@@ -118,7 +118,7 @@
 
     <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="/">
+            <a href="{{ route('home') }}">
                 <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="dark-logo">
                 <img src="{{ asset('admin/vendors/images/hr-logos_white.png') }}" alt="" class="light-logo">
             </a>
@@ -130,12 +130,12 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     @can('Newsfeed Module')
-                    <li class="dropdown">
-                        <a href="{{ route('Feed.index') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-house-1">
-                            </span><span class="mtext">News Feed</span>
-                        </a>
-                    </li>
+                        <li class="dropdown">
+                            <a href="{{ route('Feed.index') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon dw dw-house-1">
+                                </span><span class="mtext">News Feed</span>
+                            </a>
+                        </li>
                     @endcan
                     @can('Attendance Module')
                         <li class="dropdown">
@@ -151,12 +151,12 @@
                         </li>
                     @endcan
 
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="{{ route('calender') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-calendar-5">
                             </span><span class="mtext">Events</span>
                         </a>
-                    </li>
+                    </li> --}}
                     @can('User Module')
                         <li class="dropdown">
                             <a href="{{ route('users.index') }}" class="dropdown-toggle no-arrow">
@@ -200,12 +200,14 @@
                             <span class="mtext">Task</span>
                         </a>
                     </li>
-                    <li class="dropdown">
-                        <a href="{{ route('payroll.index') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-money-2"></span>
-                            </span><span class="mtext">Payroll</span>
-                        </a>
-                    </li>
+                    @can('Payrol Module')
+                        <li class="dropdown">
+                            <a href="{{ route('payroll.index') }}" class="dropdown-toggle no-arrow">
+                                <span class="micon dw dw-money-2"></span>
+                                </span><span class="mtext">Payroll</span>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </div>
@@ -264,7 +266,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('.example').DataTable();
         })
     </script>
 

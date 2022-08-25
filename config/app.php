@@ -197,6 +197,8 @@ return [
 
         // MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
+
 
 
 
@@ -217,8 +219,9 @@ return [
         // 'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class,
         'Input' => Illuminate\Support\Facades\Request::class,
+        'Image'     => Intervention\Image\Facades\Image::class
+
 
 
 

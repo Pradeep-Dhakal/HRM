@@ -23,7 +23,8 @@ class PermissionTableSeeder extends Seeder
             'User Module',
             'Roles & permission module',
             'Leave Module',
-            'Task Module'
+            'Task Module',
+            'Payrol Module'
 
         ];
 

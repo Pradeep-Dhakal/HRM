@@ -2,23 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\Salary;
 use App\Models\User;
+use Carbon\Carbon;
+use Google\Service\PolyService\Format;
 // use Google\Service\Transcoder\Input;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 
 class PayrollController extends Controller
 {
+    function __construct()
+    {
+
+
+        $this->middleware('permission:Payrol Module', ['only' => ['index','store','create','edit','destroy','show']]);
+       //  $this->middleware('permission:user-create', ['only' => ['create','store']]);
+       //  $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+       //  $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+
+}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
-        $users=User::all();
-        $filterusers=User::where('id',Request()->get('User_id'))->first();
-        return view('payroll.index', compact('users','filterusers'));
+        $users = User::all();
+
+        $filterusers = User::where('id', Request()->get('User_id'))->first();
+        $date=Request()->get('month');
+        $salary=Salary::where('user_id',Request()->get('User_id'))->first();
+        // dd($salary);
+
+        $total_working_days=Attendance::select('*')->where('user_id',Request()->get('User_id'))->whereMonth('date',(Carbon::parse(Request()->get('month'))->format('m')))->whereYear('date',(Carbon::parse(Request()->get('month'))->format('Y')))->get();
+
+
+
+
+
+
+        return view('payroll.index', compact('users', 'filterusers','total_working_days','date','salary'));
+
+
+
+
+        // dd(count($total_working_days));
+
     }
 
     /**

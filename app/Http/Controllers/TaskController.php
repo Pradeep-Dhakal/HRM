@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\DocBlock\Tag;
 use Illuminate\Support\Facades\Session;
 use App\Notifications\TaskEmailNotification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
 
@@ -31,7 +32,10 @@ class TaskController extends Controller
     public function index()
     {
         $taskdata = Task::all();
-        return view('task.index', compact('taskdata'));
+        $mytask=Task::all()->where('user_id',Auth::user()->id);
+        // dd($mytask);
+        return view('task.index', compact('taskdata','mytask'));
+
     }
 
     /**
@@ -133,7 +137,8 @@ class TaskController extends Controller
     {
         // dd($request->all());
         $updatetasks = Task::find($id);
-        $updatetasks->User_id = $request->User_id;
+        // dd($updatetasks);
+        $updatetasks->User_id = $updatetasks->user_id;
         $updatetasks->task_name = $request->task_name;
         $updatetasks->Assigned_by = auth()->user()->name;
         $updatetasks->description = $request->description;

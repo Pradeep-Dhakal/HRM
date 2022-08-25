@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 
 use App\Models\Attendance;
-
+use Google\Service\Directory\Role;
 
 class User extends Authenticatable
 {
@@ -68,5 +68,6 @@ class User extends Authenticatable
     public function personalinfo(){
         return $this->hasOne(Personalinfo::class);
     }
+
 
 }

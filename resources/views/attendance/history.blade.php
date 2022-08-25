@@ -32,7 +32,7 @@
                     @foreach ($newdata as $key => $dat)
                         <tr>
                             <th scope="row">{{ $key + 1 }}</th>
-                            <td>{{ $dat->Date }}</td>
+                            <td>{{ $dat->date }}</td>
                             <td>{{ $dat->check_in }}</td>
                             <td>{{ $dat->check_out }}</td>
                             <td>{{ $dat->description }}</td>
@@ -40,12 +40,17 @@
                             <td>
                                 {{-- <a href="{{route('attendance.create')}}">
                 <i class="fa fa-checkin">Check In</i></a> --}}
+                                @if (Auth::user()->hasRole('admin'))
+                                    <a href="{{ route('attendance.edit', $dat->id) }}"> <i class="fa fa-edit">Update</i></a>
+                                @endif
                                 @if ($dat->check_out == '')
                                     <a href="{{ route('attendance.edit', $dat->id) }}">
                                         <i class="fa fa-checkin">Check Out</i></a>
+                                    <br>
                                 @else
                                     <strong>Already Done</strong>
                                 @endif
+
                             </td>
                         </tr>
                     @endforeach
@@ -61,15 +66,18 @@
             $tday = Carbon\Carbon::today();
             // dd($tday);
             $newd = DB::select('select * from attendances where user_id = ' . auth()->user()->id);
-            dd($newd);
+            // $todaydatedata=DB::select('select * from attendances where user_id = '. auth()->user()->id .' and date'.' = '.$tday))->first();
+            // dd($todaydatedata);
             ?>
             @isset($newd)
-                @if ($newd->date == $tday)
-                @else
-                    <a href="{{ route('attendance.create') }}">
-                        <button class="btn btn-primary">Create New Attendance</button>
-                    </a>
-                @endif
+                @foreach ($newd as $newd)
+                    @if (Carbon\Carbon::parse($newd->date) == Carbon\Carbon::parse($tday))
+                    @else
+                        <a href="{{ route('attendance.create') }}">
+                            <button class="btn btn-primary">Create New Attendance</button>
+                        </a>
+                    @endif
+                @endforeach
             @endisset
 
 

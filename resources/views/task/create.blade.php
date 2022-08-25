@@ -32,8 +32,11 @@
                             <select name="User_id" id="user">
 
                                 @foreach ($usernames as $users)
-                                <option value="{{$users->id}}">{{$users->name}}</option>
-
+                                    @if ($users->id != Auth::user()->id)
+                                        <option value="{{ $users->id }}">{{ $users->name }}</option>
+                                    @else
+                                        No user available to assign the task
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -45,7 +48,7 @@
                                 value="" required>
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Description</label>
                         <div class="col-sm-12 col-md-10">
                             <textarea name="description" id="document" class="ckeditor form-control" placeholder="" value=""></textarea>
@@ -56,22 +59,21 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Assigne Date</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="date" id="assigndate_picker" name="assigned_date" placeholder="Enter task assigned data"
-                                value="" required>
+                            <input class="form-control" type="date" id="assigndate_picker" name="assigned_date"
+                                placeholder="Enter task assigned data" value="" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Due Date</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="date" id="duedate_picker" name="due_date" placeholder="Enter task due data"
-                                value="" required>
+                            <input class="form-control" type="date" id="duedate_picker" name="due_date"
+                                placeholder="Enter task due data" value="" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">File</label>
                         <div class="col-sm-12 col-md-10">
-                            <input type="file" name="task_file" placeholder=""
-                                value="" required>
+                            <input type="file" name="task_file" placeholder="" value="" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -86,7 +88,7 @@
         </div>
     </div>
 
-    {{-- this javascripte is for disabling previous date  --}}
+    {{-- this javascripte is for disabling previous date --}}
     <script language="javascript">
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -94,15 +96,15 @@
         var yyyy = today.getFullYear();
 
         today = yyyy + '-' + mm + '-' + dd;
-        $('#assigndate_picker').attr('min',today);
+        $('#assigndate_picker').attr('min', today);
     </script>
-        <script language="javascript">
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
 
-            today = yyyy + '-' + mm + '-' + dd;
-            $('#duedate_picker').attr('min',today);
-        </script>
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#duedate_picker').attr('min', today);
+    </script>
 @endsection
