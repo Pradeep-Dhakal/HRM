@@ -59,27 +59,37 @@
         </table>
     @else
         <div class="text-center ">
-            <h2>
-                Your Attendace History
-            </h2>
+
             <?php
             $tday = Carbon\Carbon::today();
             // dd($tday);
             $newd = DB::select('select * from attendances where user_id = ' . auth()->user()->id);
-            // $todaydatedata=DB::select('select * from attendances where user_id = '. auth()->user()->id .' and date'.' = '.$tday))->first();
+            $today_date_attendance = App\Models\Attendance::whereMonth('date', '=', Carbon\Carbon::now()->format('m'))
+                ->whereDay('date', '=', Carbon\Carbon::now())
+                ->first();
+            // dd($today_date_attendance->date);
+            // $todaydatedata=DB::select('select * from attendances where user_id = '. auth()->user()->id .' and date'.' = '.$tday)->get();
             // dd($todaydatedata);
             ?>
-            @isset($newd)
+            {{-- @isset($newd)
                 @foreach ($newd as $newd)
-                    @if (Carbon\Carbon::parse($newd->date) == Carbon\Carbon::parse($tday))
-                    @else
-                        <a href="{{ route('attendance.create') }}">
-                            <button class="btn btn-primary">Create New Attendance</button>
-                        </a>
+                    @if (Carbon\Carbon::parse($newd->date) == $today_date_attendance->date)
+                    <a href="{{ route('attendance.create') }}">
+                        <button class="btn btn-primary">Create New Attendance</button>
+                    </a>
                     @endif
                 @endforeach
-            @endisset
+            @endisset --}}
+            @isset($today_date_attendance->date)
+                @if ($today_date_attendance->date == $tday)
 
+                    @else
+                    <a href="{{ route('attendance.create') }}">
+                        <button class="btn btn-primary">Create New Attendance</button>
+                    </a>
+
+                @endif
+            @endisset
 
             <table class="table table-hover table-dark">
                 <thead>
