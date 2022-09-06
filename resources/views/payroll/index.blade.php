@@ -114,10 +114,13 @@
                         $bonusAmount=0;
                     @endphp
                     <div>
-                        <h5>Total Wotking Days :
-                            @isset($total_working_days)
-                                {{ count($total_working_days) }}</h5>
-                        @endisset
+                        <h5>Total Wotking Days : 26 </h5>
+                            {{-- @php
+                               $total_office_day;
+                            @endphp --}}
+                            {{-- @isset($total_working_days)
+                                {{ count($total_working_days) }}
+                        @endisset --}}
                         Total Present days: {{$days}}
                     </div>
 

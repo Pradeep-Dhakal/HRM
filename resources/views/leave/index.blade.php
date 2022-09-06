@@ -52,6 +52,10 @@
                             <td>{{ $authdata->users->name }}</td>
                             <td>{{ $authdata->subject }}</td>
                             <td>{{ $authdata->date }}</td>
+                            @php
+                                //  dd( $authdata->status)
+                            @endphp
+
                             <td>{{ $authdata->status }}</td>
                             <td>
                                 <a href="{{ route('leave.show', $authdata->id) }}"><i style="font-size: 30px;"

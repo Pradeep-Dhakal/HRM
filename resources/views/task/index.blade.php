@@ -52,8 +52,6 @@
                                     </div>
                                 </div>
                             </td>
-
-
                         </tr>
                     @empty
                         <tr>
@@ -80,6 +78,7 @@
         </div>
     @else
         <div class="container">
+            <a href="{{ route('task.create') }}" class="btn btn-success pull-right">assign task</a>
 
             <table id="example" class="table table-striped table-bordered example" style="width:100%">
                 <thead>

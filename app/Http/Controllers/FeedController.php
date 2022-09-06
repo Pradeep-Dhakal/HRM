@@ -52,6 +52,13 @@ class FeedController extends Controller
     public function store(Request $request)
     {
 
+        $this->validate($request, [
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+
+        ]);
+
+
         $data = $request->all();
         // dd($data);
 

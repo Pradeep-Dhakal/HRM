@@ -87,7 +87,6 @@
                     <a href="{{ route('attendance.create') }}">
                         <button class="btn btn-primary">Create New Attendance</button>
                     </a>
-
                 @endif
             @endisset
 
