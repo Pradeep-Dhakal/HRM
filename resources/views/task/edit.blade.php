@@ -69,6 +69,7 @@
                                 placeholder="Enter task assigned data" value="{{ $user->assigned_date }}" required>
                         </div>
                     </div>
+                    @role('admin')
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Due Date</label>
                         <div class="col-sm-12 col-md-10">
@@ -76,6 +77,7 @@
                                 value="{{ $user->due_date }}" required>
                         </div>
                     </div>
+                    @endrole
 
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Select Status</label>

@@ -21,6 +21,53 @@ class UserInfoController extends Controller
     }
     public function store(Request $request, $id)
     {
+
+
+        $this->validate($request, [
+            // for bacis profile info
+            'fname' => 'required|string|max:30',
+            'lname' => 'required|string|max:30',
+            'email' => 'required|email|unique:users',
+            'dob' => 'required',
+            'gender' => 'required',
+            'bloodgroup' => 'required',
+            'phone' => 'required|min:10',
+            'citizen_no' => 'required|max:20',
+            'nid' => 'required',
+            'image' => 'required|mimes:jpeg,png,jpg|max:2048',
+
+            //for contact details
+
+            't_district' => 'required|string|max:50',
+            't_tole' => 'required|string|max:50',
+            't_wad' => 'required|numeric|max:2',
+            't_house_no' => 'required',
+
+            'p_district' => 'required|string|max:50',
+            'p_tole' => 'required|string|max:50',
+            'p_wad' => 'required|numeric|max:2',
+            'p_house_no' => 'required',
+
+            //for academic
+            'academicdocuments' => 'required',
+            'univarsity_name' => 'required|string',
+            'institution_name' => 'required|string',
+            'joined_year' => 'required',
+            'passed_year' => 'required',
+
+
+            // for skills
+            'documents' => 'required',
+            'name' => 'required|string|max:50',
+            'duration' => 'required|string|numeric',
+
+
+            // for salary
+            'type' => 'required|string',
+            'amount' => 'required|string|numeric',
+
+        ]);
+
         // dd($request->all());
         //  this area contents the code for personal info
 

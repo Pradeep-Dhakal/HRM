@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('remarks')->nullable();
             $table->string('date')->nullable();
+            $table->string('check_in')->nullable();
+            $table->string('check_out')->nullable();
+
             $table->string('Total_Hours')->nullable();
             $table->string('IP')->nullable();
             $table->timestamps();

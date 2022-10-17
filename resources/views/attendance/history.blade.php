@@ -14,11 +14,13 @@
             <thead>
                 <tr>
                     <th scope="col">Sn</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Date</th>
                     <th scope="col">Check in</th>
                     <th scope="col">Check Out</th>
                     <th scope="col">Description</th>
                     <th scope="col">Total Hours</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -32,12 +34,42 @@
                     @foreach ($newdata as $key => $dat)
                         <tr>
                             <th scope="row">{{ $key + 1 }}</th>
+                            <th>
+                                @php
+                                    $username=App\Models\User::select('name')->where('id',$dat->user_id)->first();
+                                @endphp
+
+                                {{$username->name}}</th>
                             <td>{{ $dat->date }}</td>
                             <td>{{ $dat->check_in }}</td>
                             <td>{{ $dat->check_out }}</td>
                             <td>{{ $dat->description }}</td>
                             <td>{{ $dat->Total_Hours }}</td>
                             <td>
+                                @php
+                                    $required_time_in_hour='00:08:00';
+                                    // $result = Carbon::parse($request->check_in)->diffInMinutes(Carbon::parse($request->check_out));
+
+                                    $overtime =Carbon\Carbon::parse($dat->Total_Hours)->diffInMinutes(Carbon\Carbon::parse($required_time_in_hour));
+                                    // dd((int)$dat->Total_Hours);
+                                    $insufficient_hour=Carbon\Carbon::parse($required_time_in_hour)->diffInMinutes(Carbon\Carbon::parse($dat->Total_Hours));
+
+
+                                    // dd($insufficient_hour);
+                                @endphp
+
+                                @if ($dat->Total_Hours>$required_time_in_hour)
+                                OverTime by {{$overtime}} hour
+                                @else
+                                Insuficient by: {{$insufficient_hour}} hour
+
+                                @endif
+
+
+
+                            </td>
+                            <td>
+
                                 {{-- <a href="{{route('attendance.create')}}">
                 <i class="fa fa-checkin">Check In</i></a> --}}
                                 @if (Auth::user()->hasRole('admin'))
@@ -94,11 +126,13 @@
                 <thead>
                     <tr>
                         <th scope="col">Sn</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Date</th>
                         <th scope="col">Check in</th>
                         <th scope="col">Check Out</th>
                         <th scope="col">Description</th>
                         <th scope="col">Total Hours</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -112,11 +146,36 @@
                         @foreach ($data1 as $key => $dat1)
                             <tr>
                                 <th scope="row">{{ $key + 1 }}</th>
+                                <td>{{Auth::user()->name}}</td>
                                 <td>{{ $dat1->Date }}</td>
                                 <td>{{ $dat1->check_in }}</td>
                                 <td>{{ $dat1->check_out }}</td>
                                 <td>{{ $dat1->description }}</td>
                                 <td>{{ $dat1->Total_Hours }}</td>
+                                <td>
+                                    @php
+                                        $required_time_in_hour='00:08:00';
+                                        // $result = Carbon::parse($request->check_in)->diffInMinutes(Carbon::parse($request->check_out));
+
+                                        $overtime =Carbon\Carbon::parse($dat1->Total_Hours)->diffInMinutes(Carbon\Carbon::parse($required_time_in_hour));
+                                        // dd((int)$dat->Total_Hours);
+                                        $insufficient_hour=Carbon\Carbon::parse($required_time_in_hour)->diffInMinutes(Carbon\Carbon::parse($dat1->Total_Hours));
+
+
+                                        // dd($insufficient_hour);
+                                    @endphp
+
+                                    @if ($dat1->Total_Hours>$required_time_in_hour)
+                                    OverTime by {{$overtime}} hour
+                                    @else
+                                    Insuficient by: {{$insufficient_hour}} hour
+
+                                    @endif
+
+
+
+                                </td>
+
                                 <td>
                                     {{-- <a href="{{route('attendance.create')}}">
                 <i class="fa fa-checkin">Check In</i></a> --}}

@@ -12,8 +12,8 @@
         </div>
         <form method="POST" action="{{route('attendance.store')}}">
             {{-- @method('PUT') --}}
-            @csrf
 
+            @csrf
             <h3>Record Your Attendance</h3>
             <br>
             @include('attendance.clock')

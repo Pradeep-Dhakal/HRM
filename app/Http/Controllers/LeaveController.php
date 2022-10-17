@@ -119,7 +119,7 @@ class LeaveController extends Controller
 
         $leave = Leave::find($id);
         // $data = $request->all();
-        $leave->user_id = auth()->user()->id;
+        $leave->user_id = $leave->user_id;
         $leave->subject = $leave->subject;
         $leave->date =  $leave->date;
         $leave->message = $leave->message;

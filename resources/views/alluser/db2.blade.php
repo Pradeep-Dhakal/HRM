@@ -76,14 +76,13 @@
                         <div class="widget-data text-center">
                             @php
                                 $todaysdate = Carbon::today()->format('Y-m-d');
-
-                                // $totalusers = DB::select('select * from leaves where status="Approved" AND date='.$todaysdate);
-                                $totalusers=App\Models\Leave::where('status','Approved')->whereMonth('date', '=', Carbon::now()->format('m'))
+                                $leaveuser=App\Models\Leave::where('status','Approved')->whereMonth('date', '=', Carbon::now()->format('m'))
                                     ->whereDay('date', '=', Carbon::now()->format('d'))
                                     ->get();
 
+
                             @endphp
-                        <div class="h4 mb-0"><h2>{{ count($totalusers) }}</h2></div>
+                        <div class="h4 mb-0"><h2>{{ count($leaveuser) }}</h2></div>
                         <div class="weight-600 font-14"><h3>On leave Today</h3></div>
                     </div>
                 </div>
@@ -110,12 +109,20 @@
                                     ->count();
 
                             @endphp
-                            <section class="container-fluid">
+                            <!-- <section class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div id="donut-chart"></div>
                                     </div>
-
+                                    <div class="col-md-3">
+                                        <div id="attendance-chart"></div>
+                                    </div>
+                                </div>
+                            </section> -->
+                            <section>
+                                <div class = "row chart-section">
+                                <canvas id="user-chart" style="width:60%;max-width:500px"></canvas>
+                                <canvas id="task-chart" style="width:10%;max-width:500px"></canvas>
                                 </div>
                             </section>
 <hr>
@@ -124,36 +131,122 @@
                             {{-- this js is for showing the chart --}}
 
                             <script language="javascript">
+                                // $(document).ready(function() {
+
+                                //     donutChart();
+
+                                //     $(window).resize(function() {
+                                //         window.donutChart.redraw();
+                                //     });
+                                // });
+
+                                // function donutChart() {
+                                //     window.donutChart = Morris.Donut({
+                                //         element: 'donut-chart',
+                                //         data: [{
+                                //                 label: "Finished Task ",
+                                //                 value: {!! $finished !!}
+                                //             },
+                                //             {
+                                //                 label: "Pending task",
+                                //                 value: {!! $Pending !!}
+                                //             },
+                                //             {
+                                //                 label: "Not Started",
+                                //                 value: {!! $Not_started !!}
+                                //             },
+
+                                //         ],
+                                //         resize: true,
+                                //         redraw: true
+                                //     });
+                                // }
+
+                                //Chart for Users
+                                var xValues = ["Present Users", "Users on Leave"];
+                                var yValues = [{!! count($totalcheckinusers) !!}, {!! count($leaveuser) !!} ];
+                                var barColors = [
+                                "#b91d47",
+                                "#00aba9",
+                                "#2b5797",
+                                "#e8c3b9",
+                                "#1e7145"
+                                ];
+                                new Chart("user-chart", {
+                                    type: "pie",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                        }]
+                                    },
+                                    options: {
+                                        title: {
+                                        display: true,
+                                        text: "Users"
+                                        }
+                                    }
+                                    });
+                                //chart for task
+                                var xValues = ["Finished Tasks", "Pending", "On Progress", "Not Started"];
+                                var yValues = [ {!! $finished !!}, {!! $Pending !!} , {!! $Progress !!} , {!! $Not_started !!} ];
+                                var barColors = ["green","yellow","blue","red"];
+                                new Chart("task-chart", {
+                                    type: "bar",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                        }]
+                                    },
+                                    options: {
+                                        title: {
+                                        display: true,
+                                        text: "Tasks"
+                                        }
+                                    }
+                                    });
+                            </script>
+<hr>
+<hr>
+
+
+
+                            {{-- this js is for showing the attendance chart --}}
+
+                            <!-- <script language="javascript">
                                 $(document).ready(function() {
 
-                                    donutChart();
+                                    attendanceChart();
 
                                     $(window).resize(function() {
                                         window.donutChart.redraw();
                                     });
                                 });
 
-                                function donutChart() {
+                                function attendanceChart() {
                                     window.donutChart = Morris.Donut({
-                                        element: 'donut-chart',
+                                        element: 'attendance-chart',
                                         data: [{
-                                                label: "Finished Task ",
-                                                value: {!! $finished !!}
+                                                label: "Total Users",
+                                                value: {!! count($totalusers) !!}
                                             },
                                             {
-                                                label: "Pending task",
-                                                value: {!! $Pending !!}
+                                                label: "Present Users",
+                                                value: {!! count($totalcheckinusers) !!}
                                             },
                                             {
-                                                label: "Not Started",
-                                                value: {!! $Not_started !!}
+                                                label: "Absent Users",
+                                                value: {!! count($leaveuser) !!}
                                             },
 
                                         ],
                                         resize: true,
                                         redraw: true
                                     });
-                                }
-                            </script>
+                                } -->
+                            <!-- </script> -->
 
                         @endsection

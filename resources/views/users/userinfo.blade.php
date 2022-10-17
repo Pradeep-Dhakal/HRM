@@ -5,7 +5,17 @@
             <div class="">
                 <h2 id="heading"> Add User info</h2>
                 <p>Fill all form field to go to next step</p>
-                <form id="msform" method="post" action="{{route('store',$id)}}" enctype="multipart/form-data">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form id="msform" method="post" action="{{ route('store', $id) }}" enctype="multipart/form-data">
                     @csrf
                     <!-- progressbar -->
                     <ul id="progressbar">
@@ -112,7 +122,8 @@
 
                         </div>
                         <input type="button" name="next" class="next action-button" value="Next" />
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <input type="button" name="previous" class="previous action-button-previous"
+                            value="Previous" />
                     </fieldset>
                     {{-- end address info --}}
                     {{-- start academic info --}}
@@ -142,10 +153,11 @@
                             </div>
                         </div>
                         <input type="button" name="next" class="next action-button" value="Next" />
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <input type="button" name="previous" class="previous action-button-previous"
+                            value="Previous" />
                     </fieldset>
                     {{-- end academic info --}}
-                    {{-- start skill nad experience  --}}
+                    {{-- start skill nad experience --}}
                     <fieldset>
                         <div class="form-card">
                             <div class="row">
@@ -174,11 +186,14 @@
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">1</th>
-                                                        <td><input type="text"  name="name[]" class="form-control" placeholder="Enter Skill/ Experience title">
+                                                        <td><input type="text" name="name[]" class="form-control"
+                                                                placeholder="Enter Skill/ Experience title">
                                                         </td>
-                                                        <td><input type="text" name="duration[]" class="form-control" placeholder="total duration">
+                                                        <td><input type="text" name="duration[]" class="form-control"
+                                                                placeholder="total duration">
                                                         </td>
-                                                        <td><input type="file" name="documents[]" class="form-control" placeholder="upload your certificate">
+                                                        <td><input type="file" name="documents[]" class="form-control"
+                                                                placeholder="upload your certificate">
                                                         </td>
                                                         </td>
                                                         <td>
@@ -189,8 +204,7 @@
                                         </div>
                                         <div class="text-right">
                                             <!-- Add rows button-->
-                                            <a class="btn btn-primary rounded-0" id="insertnewSkill"
-                                                href="#">Add
+                                            <a class="btn btn-primary rounded-0" id="insertnewSkill" href="#">Add
                                                 new row</a>
                                         </div>
                                     </div>
@@ -198,7 +212,8 @@
                             </div>
                         </div>
                         <input type="button" name="next" class="next action-button" value="Next" />
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <input type="button" name="previous" class="previous action-button-previous"
+                            value="Previous" />
                     </fieldset>
                     {{-- end skill and experience --}}
                     {{-- start salary details --}}
@@ -221,16 +236,18 @@
                                             <option value="2">monthly</option>
                                         </select>
                                         <label for="amount">Amount</label>
-                                        <input type="text" name="amount" class="form-control" placeholder="Salary anount">
+                                        <input type="text" name="amount" class="form-control"
+                                            placeholder="Salary anount">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{-- <input type="button" name="next" class="next action-button" value="Next" /> --}}
-                        <button type="submit" class="btn btn-primary" class="next action-button">Submit  </button>
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <button type="submit" class="btn btn-primary" class="next action-button">Submit </button>
+                        <input type="button" name="previous" class="previous action-button-previous"
+                            value="Previous" />
                     </fieldset>
-                    {{-- end salary detals  --}}
+                    {{-- end salary detals --}}
                     {{-- filal part --}}
                     <fieldset>
                         <div class="form-card">
@@ -255,7 +272,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    {{-- final  --}}
+                    {{-- final --}}
                 </form>
 
             </div>
