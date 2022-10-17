@@ -194,12 +194,16 @@
                             </ul>
                         </li>
                     @endcan
+                    @can('Task Module')
+
                     <li class="dropdown">
                         <a href="{{ route('task.index') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-slideshow"></span>
                             <span class="mtext">Task</span>
                         </a>
                     </li>
+                    @endcan
+
                     @can('Payrol Module')
                         <li class="dropdown">
                             <a href="{{ route('payroll.index') }}" class="dropdown-toggle no-arrow">
